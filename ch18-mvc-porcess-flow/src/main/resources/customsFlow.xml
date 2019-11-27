@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="cutsom.MyRequestMapping">
+        <property name="handlers">
+            <map>
+            <entry key="/cust" value="cutsom.MyController"></entry>
+                <entry key="cust2" value="cutsom.MyController2"/>
+            </map>
+        </property>
+    </bean>
+    <bean class="cutsom.MyRequestMapping"/>
+    <bean class="cutsom.MyViewResolver"/>
+</beans>

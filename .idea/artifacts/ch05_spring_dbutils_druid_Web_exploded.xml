@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ch05-spring-dbutils-druid:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ch05_spring_dbutils_druid_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="ch05-spring-dbutils-druid/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ch05-spring-dbutils-druid" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

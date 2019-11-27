@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+<!--
+ before：前置通知，在连接点方法之前执行，而且不能控制连接点是否执行
+after ：后置通知也叫最终通知，只要连接点执行，不管是否会报错都会执行
+after-return：返回通知，连接点正常执行（不报错）就会执行这个通知
+
+throwing：异常通知：连接点抛出异常才执行，这个通知不能处理异常只能得到异常
+异常通知如果想要把目标方法抛出异常传递给通知方法
+只需要在异常通知throwing属性设置的值等于通知方法的参数就可以
+当异常通知方法“有”异常类型作为参数时，潜台词是只有目标方法抛出的异常是参数指定类型
+的异常或是子类型时，此通知方法才会得到执行
+
+around通知：环绕通知，一般使用环绕通知就够，它可以取代上面四种通知
+也可以进行异常的捕获处理，也可以组织目标方法执行。（niu bi ke la si）
+ -->
+
+    <bean id="log" class="com.logImpl"/>
+    <bean id="log2" class="com.logImpl2"/>
+    <bean id="employeeService" class="com.EmployeeServiceImpl"/>
+    <aop:config>
+<!--  切点表达式 ：织入到那个类中     -->
+        <aop:pointcut id="myPointcut" expression="execution (* com.EmployeeServiceImpl.*(..)) "></aop:pointcut>
+<!--    切面表示：要插入的地方        -->
+        <aop:aspect ref="log">
+<!--   下面是用什么方法插入，插在那个方法     -->
+<!--                <aop:before method="before" pointcut-ref="myPointcut"/>-->
+<!--                    <aop:after method="after" pointcut-ref="myPointcut"/>-->
+<!--                    <aop:after-returning method="afterReturn" pointcut-ref="myPointcut"/>-->
+<!--                    <aop:after-throwing method="throwing" throwing="re"-->
+<!--                                        pointcut-ref="myPointcut"/>-->
+
+            <!--     环绕通知：   around    -->
+            <aop:around method="aroundAdvice" pointcut-ref="myPointcut"/>
+            </aop:aspect>
+
+    </aop:config>
+</beans>

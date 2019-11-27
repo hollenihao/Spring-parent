@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="log" class="com.logImpl"/>
+    <bean id="log2" class="com.logImpl2"/>
+    <bean id="employeeService" class="com.EmployeeServiceImpl"></bean>
+
+
+
+    <aop:config>
+<!--  aop：pointcut写在外面其他的aspect（都可以用）  -->
+            <aop:pointcut id="myPointcut" expression="execution (* com.EmployeeServiceImpl.*(..))"/>
+
+<!--     order:数字小的优先配置   -->
+        <aop:aspect ref="log" order="3">
+
+            <aop:around method="aroundAdvice" pointcut-ref="myPointcut"/>
+
+        </aop:aspect>
+            <aop:aspect ref="log" order="2">
+                <aop:around method="aroundAdvice2" pointcut-ref="myPointcut"/>
+            </aop:aspect>
+    </aop:config>
+</beans>

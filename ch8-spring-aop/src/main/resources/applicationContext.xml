@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="log" class="com.LogImpl"></bean>
+    <bean id="dept" class="com.service.DeptServiceImpl"/>
+    <bean id="employee" class="com.service.EmployeeServiceImpl"/>
+
+<!--
+proxy-target-class作用:
+false：默认情况下spring生成动态代理，会考虑被代理对象是否有实现接口，有实现接口，会用jdk动态代理技术生成的代理类，
+而不是目标的子类
+如果没有，就会用cglib创建动态代理，是建立子类的方式来实现
+
+true：proxy-target-class就是（代理目标类）不管你有没有实现接口多会用cglib创建动态代理类
+-->
+    <aop:config proxy-target-class="true">
+<!--   切面类的的配置     -->
+        <aop:aspect id="logAspect" ref="log">
+<!--   切点表达式         -->
+        <aop:pointcut id="myPointcut" expression="execution (* com.service.*.*(..))"/>
+
+            <aop:before method="before" pointcut-ref="myPointcut"/>
+        </aop:aspect>
+
+    </aop:config>
+</beans>

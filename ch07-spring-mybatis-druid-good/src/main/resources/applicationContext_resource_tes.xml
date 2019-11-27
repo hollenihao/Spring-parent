@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="resourceTest" class="test.SrpingResourceTest">
+        <property name="resource" value="mybatis-Config.xml"></property>
+        <property name="resources" value="classpath*:*Mapper.xml"/>
+     </bean>
+</beans>

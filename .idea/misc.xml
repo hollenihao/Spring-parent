@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/ch05-spring-dbutils-druid" />
+    <file type="web" url="file://$PROJECT_DIR$/ch06-spring-mybatis-druid" />
+    <file type="web" url="file://$PROJECT_DIR$/ch07-spring-mybatis-druid-good" />
+    <file type="web" url="file://$PROJECT_DIR$/ch07-spring-mybatis-druid-recommend" />
+    <file type="web" url="file://$PROJECT_DIR$/ch16-code-mybatis" />
+    <file type="web" url="file://$PROJECT_DIR$/ch17-mvc-holleword" />
+    <file type="web" url="file://$PROJECT_DIR$/ch18-mvc-porcess-flow" />
+    <file type="web" url="file://$PROJECT_DIR$/ch19-mvc-request-mapping" />
+    <file type="web" url="file://$PROJECT_DIR$/ch20-mvc-receive-data" />
+    <file type="web" url="file://$PROJECT_DIR$/ch21-mvc-validation" />
+    <file type="web" url="file://$PROJECT_DIR$/ch22-mvc-view" />
+    <file type="web" url="file://$PROJECT_DIR$/ch23-mvc-static" />
+    <file type="web" url="file://$PROJECT_DIR$/ch24-mvc-json" />
+    <file type="web" url="file://$PROJECT_DIR$/ch25-mvc-intercapher" />
+    <file type="web" url="file://$PROJECT_DIR$/ch27-mvc-file" />
+    <file type="web" url="file://$PROJECT_DIR$/ch28-ssm-xml" />
+    <file type="web" url="file://$PROJECT_DIR$/ch29-ssm-xml-modle-paret/demo-controller" />
+    <file type="web" url="file://$PROJECT_DIR$/ch30-ssm-xml-paret" />
+    <file type="web" url="file://$PROJECT_DIR$/ch31-servlet3" />
+    <file type="web" url="file://$PROJECT_DIR$/ch32-mvc-code" />
+    <file type="web" url="file://$PROJECT_DIR$/ch33-mvc-ssm-code" />
+    <type id="Spring" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

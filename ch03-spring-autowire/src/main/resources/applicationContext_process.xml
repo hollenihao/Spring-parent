@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:C="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="b" class="process.B"/>
+    <bean id="c" class="process.C"/>
+
+    <bean id="a" class="process.A"
+          init-method="init"
+    C:_0-ref="b"
+    C:_1-ref="c" scope="prototype">
+
+        <property name="b" ref="b"></property>
+    </bean>
+</beans>

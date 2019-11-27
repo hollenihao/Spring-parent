@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+<!-- 搜索注解控制器在哪个包名下面   -->
+    <context:component-scan base-package="com.controller"/>
+<!--  效验驱动  -->
+    <mvc:annotation-driven>
+<!--    消息转换器    -->
+        <mvc:message-converters>
+<!--    mappingJackson2httpMessageConverter   映射jackson2 http消息转换器     -->
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+<!-- objectMapper：对象映射器  -->
+                <property name="objectMapper">
+<!--    -->
+    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+<!--     设置日期格式   -->
+        <property name="dateFormat">
+<!--     SimpleDateFormat：简单日期格式       -->
+            <bean class="java.text.SimpleDateFormat">
+<!--  constructor-arg ：  构造函数   pattern：模式        -->
+                <constructor-arg name="pattern" value="yyyy-MM-dd"></constructor-arg>
+            </bean>
+        </property>
+    </bean>
+</property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="suffix" value=".jap"/>
+        <property name="prefix" value="/WEB-INF/"/>
+    </bean>
+
+<!--  静态文件位置  -->
+    <mvc:resources mapping="/static/**" location="classpath:/static/"/>
+
+</beans>

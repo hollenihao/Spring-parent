@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+
+>
+
+<!--
+相当于让spring读取外不properties文件
+
+placeholder：占位符
+spring会扫描很多地方的属性，比如环境变量，jdk设置的属性值等
+所以某些环境会导致properties文件的内容被覆盖，所以设置一个local-override=“true”
+location="classpath:找本地的properties文件"classpath*所有
+-->
+<context:property-placeholder location="classpath:db.properties" local-override="true"></context:property-placeholder>
+
+<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+<property name="password" value="${jdbc.password}"/>
+    <property name="username" value="${jdbc.username}"/>
+    <property name="url" value="${url}"/>
+
+ </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+<!--
+    "classpath"前缀是spring搜索资源，在当前项目中的类路径下查找文件
+    classpath*表示找当前项目的类路径和它依赖的的其他jar文件里面找
+
+    configLocation就是引入mybatis配置文件，但不支持classpath*前缀，也不支持ant风格的文件路径
+
+      分析spring源代码得到，当bean的属性类型是Resource类型时，ResourceEditor来吧字符串转换为Resource类型
+        当Bean的类型是Resource[]类型时，ResourceArrayPropertyEditor来吧字符串转换为Resource[]类型
+
+    ResourceEditor用到的是ResourceLoader，不支持classpath*，也不支持ant风格的路径
+
+    ResourceArrayPropertyEditor用得是ResourcePatternResourceResolver（ResourceLocation的子类型）
+    它支持classpath*和ant风格路径
+
+    ant的地址格式：a/*/*mapper.xml
+    **/表示多段
+    a/b/**mapper.xml
+    -->
+        <property name="configLocation" value="classpath:mybatis-Config.xml"/>
+
+    </bean>
+<!--    scan：扫描
+    扫描此包
+    不扫描得不到employedao，下面employeService依赖要用
+-->
+<mybatis:scan base-package="com.dao"/>
+<!--
+根据类型管理autowire=“byType”
+
+-->
+        <bean id="employeService" class="com.service.impl.EmployeServiceImpl" autowire="byType" ></bean>
+
+</beans>

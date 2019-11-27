@@ -1,0 +1,40 @@
+1.不加controller注解出现什么问题？
+报异常： Could not open ServletContext resource [/WEB-INF/classpath*:hello.xml.xml
+无法打开ServletContext资源[/WEB-INF/classpath*：hello.xml.xml
+
+2.controller注解换为Component注解是什么情况
+出现404，扫描不到
+
+3.RequestMapping注解写为@RequestMapping("") 和@RequestMapping("/")各是什么情况
+requestMapping为域名
+什么也没有 404页面
+4.InternalResourceViewResolver删掉，直接在控制器类的方法里面写死地址，比如return "WEB-INF/jsp/hello.jsp出现什么情况
+internalResourceViewResolver：内部资源视图解析器
+报错404，它是通过视图解析映射找到jsp文件
+
+5.InternalResourceViewResolver去掉前缀与后缀的配置或者只配前缀或只配后缀情况怎么样？？
+报错404 找不到jsp文件
+
+6.控制器类的方法名字可以任意吗？
+可以
+
+7.控制器类的方法可以是静态的吗？
+可以
+
+8.控制器类的方法可以返回任意类型吗？比如返回你自己写的一个类
+不可以
+
+9.在jsp页面里面遍历输出请求作用域所有的attribute，看看里面有什么？
+
+
+10.ModelAndView类的数据放到哪里了？为什么jsp里写el表达式可以取出来？
+
+
+11.既然创建出了一个spring容器，如何获取这个容器呢？
+
+
+12.如果能获取到这个spring容器，容器里面都有多少管理的bean？输出这些bean的名字
+
+
+13. 如果把DispatcherServlet的url-pattern配置为*.html,那么访问地址为hello.html的时候RequestMapping注解的值应该写成什么才能访问到这个
+    请求处理方法?

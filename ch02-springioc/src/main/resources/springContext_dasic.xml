@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--
+这种方法是于构造函数参数一样，如果附错值就会错位，不可以更改位置
+-->
+<!--       <bean id="dbConfig" class="inject.basic.DnConfig">-->
+<!--            <constructor-arg   value="url"></constructor-arg>-->
+<!--            <constructor-arg  value="username"/>-->
+<!--            <constructor-arg value="pwd"/>-->
+
+<!--           <property name="driverClassname" value="driver"></property>-->
+<!--        </bean>-->
+
+<!--
+ref(reference):代表引用，作用相当于bean的id一样
+index：索引可以给值定位从0开始
+name：指定属性名
+-->
+    <bean id="dbConfig" class="inject.basic.DnConfig">
+        <constructor-arg index="0" value="aa"/>
+        <constructor-arg index="2" value="bb"/>
+        <constructor-arg index="1" value="cc"/>
+
+<!--
+只有一个构造函数用property 构造函数注入
+-->
+        <property name="driverClassname" value="driver"/>
+
+     </bean>
+
+    <bean id="adders" class="inject.basic.Adders">
+    <property name="city" value="cheng"></property>
+        <property name="province" value="sheng"></property>
+    </bean>
+
+    <bean id="userInfo" class="inject.basic.UserInfo">
+        <property name="name" value="userInfo"></property>
+<!--
+下面inner bean（内部bean）只给adders用，无法通过geBean方法式得到这个对象
+
+-->
+    <property name="adders">
+        <bean class="inject.basic.Adders"></bean>
+    </property>
+        <property name="addersList">
+            <list>
+                <ref bean="adders"/>
+               <bean class="inject.basic.Adders">
+                   <property name="city" value="hh"/>
+                   <property name="province" value="aa"/>
+               </bean>
+            </list>
+        </property>
+        <property name="stringSet">
+            <set>
+                <value>stringSet不重复</value>
+                <value>contaicer</value>
+            </set>
+        </property>
+
+        <property name="map">
+            <map>
+                <entry key="ni" value="1"></entry>
+                <entry key="hao" value="2"/>
+            </map>
+        </property>
+
+        <property name="stringList">
+        <list>
+            <value>stringList</value>
+        </list>
+        </property>
+
+        <property name="properties">
+            <props>
+                <prop key="properties"></prop>
+                <prop key="属性"/>
+            </props>
+        </property>
+    </bean>
+
+</beans>

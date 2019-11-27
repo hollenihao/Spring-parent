@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--
+相当与java代码的new DruidDatasource（）；
+setUserName，setPassword，url
+-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="url" value="jdbc:mysql://localhost:3306/demo"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="root"></property>
+<!--   可以不用配Classdriver url：jdbc：mysql会自动帮我找到driver驱动     -->
+    </bean>
+
+<!--
+相当与java代码 new QueryRunner（“DataSource”，true）；
+-->
+    <bean id="queryRunner" class="org.apache.commons.dbutils.QueryRunner">
+        <constructor-arg ref="dataSource"/>
+        <constructor-arg value="true"/>
+    </bean>
+
+    <bean id="employeDao" class="com.dao.Impl.EmployeImpl" >
+    <property name="queryRunner" ref="queryRunner"/>
+    </bean>
+<!--    依赖于employeDao name：set方法-->
+    <bean id="employeService" class="com.service.Impl.EmployeServiceImpl">
+        <property name="dao" ref="employeDao"/>
+    </bean>
+</beans>

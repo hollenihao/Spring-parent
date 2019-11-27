@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--
+ 构造函数注入：就是当前类没有构造函数spring的ref（reference） 
+ -->
+    <bean id="userdao" class="inject.complex.UserDaoImpl">
+    </bean>
+    <bean id="userService" class="inject.complex.UserServiceImple">
+        <property name="dao1" ref="userdao"></property>
+    </bean>
+</beans>

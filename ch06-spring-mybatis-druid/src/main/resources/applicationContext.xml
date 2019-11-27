@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--
+这种spring于mybatis整合以经不用了
+缺点：
+每个dao（mapper）的接口多有单独配置一个MapperFactoryBean
+下面配置可以不需要mybatis-config 以及mapper xml文件
+1.有了DataSource就可以连接数据库
+2.有了sqlSessionFactoryBean的配置，就可以创建出sqlSessionFactory
+3.有了MapperFactory就可以给接口实例出来
+4.dao接口实例后业务类就可以调用
+-->
+<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"></bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"></property>
+</bean>
+
+    <bean id="employeDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+<!--注入要创建实现类mapper接口就可以得到class-->
+    <property name="mapperInterface" value="dao.EmployeDao"/>
+<!--  注入了SqlSessionFactory就可以得到sqlSession      -->
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+
+    </bean>
+    <bean id="employeService" class="service.Impl.EmployeServiceImlp">
+<property name="dao" ref="employeDao" ></property>
+    </bean>
+
+<!--
+ 这里配置bean是应为bean实现里ApplicationContextAware
+ 被spring管理之后自动往此bean注入spring容器
+ -->
+    <bean class="spring.ApplicationContextHolder"/>
+
+</beans>
